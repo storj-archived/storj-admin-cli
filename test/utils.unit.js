@@ -8,8 +8,9 @@ describe('utils functions', function() {
   describe('#addYearsToCurrentDate', function() {
 
     it('should fail for non numeric input', function() {
-      expect(utils.addYearsToCurrentDate('one').to.throw(Error);
+      expect(function () {
+      	utils.addYearsToCurrentDate('one')
+      }).to.throw(Error);
     });
   });
 });
-  

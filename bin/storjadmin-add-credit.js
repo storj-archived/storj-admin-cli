@@ -6,6 +6,7 @@ const log = require('../lib/logger');
 const mongo = require('../lib/config/mongodb');
 const add_credit = require('commander');
 const Storage = require('storj-service-storage-models');
+const utils = require('../lib/utils');
 
 add_credit
   .description('Manually add credit with user email and desired amount')
@@ -23,9 +24,6 @@ if (!add_credit.amount) {
   process.exit(1);
 }
 
-var today = new Date();
-var oneYearFromToday = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
-
 const storage  = new Storage(mongo.url, mongo.opts);
 let Credit = storage.models.Credit;
 let User = storage.models.User; 
@@ -35,7 +33,7 @@ let manualCreditArgs = {
   type: 'manual',
   promo_amount: parseInt(add_credit.amount),
   promo_code: 'new-signup',
-  promo_expires: oneYearFromToday
+  promo_expires: utils.addYearsToCurrentDate(1)
 };
 let manualCreditObj = new Credit(manualCreditArgs);
 

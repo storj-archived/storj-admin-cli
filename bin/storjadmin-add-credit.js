@@ -25,6 +25,7 @@ if (!add_credit.amount) {
 }
 
 const storage  = new Storage(mongo.url, mongo.opts);
+
 let Credit = storage.models.Credit;
 let User = storage.models.User; 
 
@@ -39,18 +40,22 @@ let manualCreditObj = new Credit(manualCreditArgs);
 
 User.findOne({_id: add_credit.user}, (err, user) => {
   if (err) {
-    return log('error', 'Failed on user lookup, reason %s',
+    log('error', 'Failed on user lookup, reason %s',
   		         err.message);
+    process.exit(1);
   }
   
   if (!user) {
-    return log('error', 'User must be have Storj account to add credit');
+    log('error', 'User must be have Storj account to add credit');
+    process.exit(1);
   }
 
   manualCreditObj.save((err, credit) => {
     if (err) {
       return log('error', 'Failed to save credit, reason: %s', err.message);
+      process.exit(1);
     }
   log('info', 'Successfully saved credit: %s', credit);
+  process.exit(1);
   });
 });

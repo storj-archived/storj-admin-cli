@@ -52,7 +52,7 @@ User.findOne({_id: add_credit.user}, (err, user) => {
 
   manualCreditObj.save((err, credit) => {
     if (err) {
-      return log('error', 'Failed to save credit, reason: %s', err.message);
+      log('error', 'Failed to save credit, reason: %s', err.message);
       process.exit(1);
     }
   log('info', 'Successfully saved credit: %s', credit);

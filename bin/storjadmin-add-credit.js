@@ -46,7 +46,7 @@ User.findOne({_id: add_credit.user}, (err, user) => {
   }
   
   if (!user) {
-    log('error', 'User must be have Storj account to add credit');
+    log('error', 'User must have Storj account to add credit');
     process.exit(1);
   }
 

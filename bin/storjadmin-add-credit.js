@@ -32,7 +32,7 @@ let manualCreditArgs = {
   user: add_credit.user,
   type: 'manual',
   promo_amount: parseInt(add_credit.amount),
-  promo_code: 'new-signup',
+  promo_code: 'storj-event',
   promo_expires: utils.addYearsToCurrentDate(1)
 };
 let manualCreditObj = new Credit(manualCreditArgs);

@@ -9,7 +9,7 @@ describe('utils functions', function() {
 
     it('should fail for non numeric input', function() {
       expect(function () {
-      	utils.addYearsToCurrentDate('one')
+      	utils.addYearsToCurrentDate('one');
       }).to.throw(Error);
     });
   });

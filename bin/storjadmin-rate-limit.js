@@ -23,25 +23,23 @@ const storage  = new Storage(mongo.url, mongo.opts);
 let User = storage.models.User;
 
 if (rate_limit.off) {
-  User.findByIdAndUpdate(
-  	rate_limit.user,
-  	{
-      $set: {
-        isFreeTier: false
-  	  }
-    }, (err, user) => {
-  	  if (err) {
-        log('error', 'Failed on user update, reason %s',
-  		    err.message);
-        process.exit(1);
-  	  }
+  User.findByIdAndUpdate(rate_limit.user, {
+  	$set: {
+  		isFreeTier: false
+  	}
+  }, (err, user) => {
+    if (err) {
+      log('error', 'Failed on user update, reason %s',
+  	      err.message);
+      process.exit(1);
+  	}
 
-  	  if (!user) {
-  		  log('error', 'User not found in db');
-  		  process.exit(1);
-  	  }
-  	  log('info', 'User rate limit successfully updated: %s',
-  		  user);
+  	if (!user) {
+  	  log('error', 'User not found in db');
   	  process.exit(1);
-    });
+  	}
+  	log('info', 'User rate limit successfully updated: %s',
+  		user);
+  	process.exit(1);
+  });
 }

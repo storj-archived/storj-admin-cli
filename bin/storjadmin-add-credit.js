@@ -39,18 +39,18 @@ let manualCreditObj = new Credit(manualCreditArgs);
 
 User.findOne({_id: add_credit.user}, (err, user) => {
   if (err) {
-  	return log('error', 'Failed on user lookup, reason %s',
-  		       err.message);
+    return log('error', 'Failed on user lookup, reason %s',
+  		         err.message);
   }
   
   if (!user) {
-  	return log('error', 'User must be have Storj account to add credit');
+    return log('error', 'User must be have Storj account to add credit');
   }
 
   manualCreditObj.save((err, credit) => {
-   if (err) {
-     return log('error', 'Failed to save credit, reason: %s', err.message);
-   }
-   log('info', 'Successfully saved credit: %s', credit);
+    if (err) {
+      return log('error', 'Failed to save credit, reason: %s', err.message);
+    }
+  log('info', 'Successfully saved credit: %s', credit);
   });
 });

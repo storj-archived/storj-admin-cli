@@ -3,7 +3,6 @@
   "name": "storj-admin-cli",
   "version": "0.0.1",
   "description": "command line program for performing manual admin tasks at Storj",
-  "preferGlobal": true,
   "bin": {
     "storjadmin": "bin/storjadmin.js"
   },

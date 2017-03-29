@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "description": "command line program for performing manual admin tasks at Storj",
   "bin": {
-    "storjadmin": "bin/storjadmin.js"
+    "storjadmin": "bin/storjadmin.js",
+    "storjadmin-add-credit": "bin/storjadmin-add-credit.js"
   },
   "repository": {
     "type": "git",

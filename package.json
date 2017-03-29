@@ -1,0 +1,34 @@
+
+{
+  "name": "storj-admin-cli",
+  "version": "0.0.1",
+  "description": "command line program for performing manual admin tasks at Storj",
+  "preferGlobal": true,
+  "bin": {
+    "storjshare": "bin/storjadmin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/storj/storj-admin-cli.git"
+  },
+  "keywords": [
+    "storj",
+    "admin",
+    "cli"
+  ],
+  "author": "Patrick Gerbes <patrick@storj.io>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/storj/storj-admin-cli/issues"
+  },
+  "homepage": "https://github.com/storj/storj-admin-cli#readme",
+  "dependencies": {
+    "async": "^1.5.2",
+    "bs58": "^3.0.0",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "kad-logger-json": "^0.1.2",
+    "prompt": "^1.0.0",
+    "storj-service-storage-models": "^8.14.0"
+  }
+}

@@ -5,7 +5,8 @@
   "description": "command line program for performing manual admin tasks at Storj",
   "bin": {
     "storjadmin": "bin/storjadmin.js",
-    "storjadmin-add-credit": "bin/storjadmin-add-credit.js"
+    "storjadmin-add-credit": "bin/storjadmin-add-credit.js",
+    "storjadmin-rate-limit": "bin/storjadmin-rate-limit.js"
   },
   "scripts": {
     "test": "npm run testsuite && npm run linter",

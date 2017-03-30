@@ -30,4 +30,4 @@ const creditOptions = {
   };
 
 const creditOperations = new CreditOperations(creditOptions);
-creditOperations.addManualCredit(userOption, amountOption);
+creditOperations.addManualCredit(userOption, amountOption, process.exit);

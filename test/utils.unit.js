@@ -11,6 +11,9 @@ describe('utils functions', function() {
       	utils.addYearsToCurrentDate('one');
       }).to.throw(Error);
     });
+    it('should return a date', function() {
+      expect(utils.addYearsToCurrentDate(1)).to.be.an.instanceOf(Date);
+    })
   });
 
   describe('#setOptionFlag', function() {

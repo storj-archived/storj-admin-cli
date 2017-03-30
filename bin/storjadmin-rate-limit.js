@@ -2,10 +2,10 @@
 
 'use strict';
 
-const log = require('../lib/logger');
 const mongo = require('../lib/config/mongodb');
 const rate_limit = require('commander');
 const Storage = require('storj-service-storage-models');
+const users = require('../lib/users');
 const utils = require('../lib/utils');
 
 rate_limit
@@ -19,27 +19,9 @@ if (!rate_limit.user) {
   process.exit(1);
 }
 
-console.log(rate_limit.off);
+const userOption = rate_limit.user; 
+const rateLimitFlagOption = utils.setOptionFlag(rate_limit.off);
 
 const storage  = new Storage(mongo.url, mongo.opts);
-const rateLimitFlag = utils.setOptionFlag(rate_limit.off);
 
-let User = storage.models.User;
-User.findByIdAndUpdate(rate_limit.user, {
-  $set: {isFreeTier: rateLimitFlag}
-  }, (err, user) => {
-  if (err) {
-    log('error', 'Failed on user update, reason %s',
-      err.message);
-    process.exit(1);
-  }
-
-  if (!user) {
-    log('error', 'User not found in db');
-    process.exit(1);
-  }
-
-  log('info', 'User rate limit successfully updated: %s',
-      user);
-  process.exit(1);
-});
+users.setUserRateLimitFlag(userOption, rateLimitFlagOption, storage);

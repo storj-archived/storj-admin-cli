@@ -24,38 +24,42 @@ if (!add_credit.amount) {
   process.exit(1);
 }
 
+const userOption = add_credit.user;
+const amountOption = parseInt(add_credit.amount);
+
 const storage  = new Storage(mongo.url, mongo.opts);
 
-let Credit = storage.models.Credit;
-let User = storage.models.User; 
+var addManualCredit = function(userEmail, creditAmount) {
+  let Credit = storage.models.Credit;
+  let User = storage.models.User; 
 
-let manualCreditArgs = {
-  user: add_credit.user,
-  type: 'manual',
-  promo_amount: parseInt(add_credit.amount),
-  promo_code: 'storj-event',
-  promo_expires: utils.addYearsToCurrentDate(1)
-};
-let manualCreditObj = new Credit(manualCreditArgs);
+  let manualCreditArgs = {
+    user: userEmail,
+    type: 'manual',
+    promo_amount: creditAmount,
+    promo_code: 'storj-event',
+    promo_expires: utils.addYearsToCurrentDate(1)
+  };
+  let manualCreditObj = new Credit(manualCreditArgs);
 
-User.findOne({_id: add_credit.user}, (err, user) => {
-  if (err) {
-    log('error', 'Failed on user lookup, reason %s',
-  		         err.message);
-    process.exit(1);
-  }
-  
-  if (!user) {
-    log('error', 'User must have Storj account to add credit');
-    process.exit(1);
-  }
-
-  manualCreditObj.save((err, credit) => {
+  User.findOne({_id: add_credit.user}, (err, user) => {
     if (err) {
-      log('error', 'Failed to save credit, reason: %s', err.message);
-      process.exit(1);
+      return log('error', 'Failed on user lookup, reason %s',
+  		           err.message);
     }
-  log('info', 'Successfully saved credit: %s', credit);
-  process.exit(1);
+  
+    if (!user) {
+      return log('error', 'User must have Storj account to add credit');
+    }
+
+    manualCreditObj.save((err, credit) => {
+      if (err) {
+        return log('error', 'Failed to save credit, reason: %s', err.message);
+      }
+    return log('info', 'Successfully saved credit: %s', credit);
+    });
   });
-});
+};
+
+addManualCredit(userOption, amountOption);
+

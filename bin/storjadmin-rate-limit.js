@@ -5,7 +5,7 @@
 const mongo = require('../lib/config/mongodb');
 const rate_limit = require('commander');
 const Storage = require('storj-service-storage-models');
-const users = require('../lib/users');
+const UserOperations = require('../lib/users');
 const utils = require('../lib/utils');
 
 rate_limit
@@ -22,6 +22,10 @@ if (!rate_limit.user) {
 const userOption = rate_limit.user; 
 const rateLimitFlagOption = utils.setOptionFlag(rate_limit.off);
 
-const storage  = new Storage(mongo.url, mongo.opts);
+const userOptions = {
+    storage: new Storage(mongo.url, mongo.opts)
+  };
 
-users.setUserRateLimitFlag(userOption, rateLimitFlagOption, storage);
+const userOperations = new UserOperations(userOptions);
+
+userOperations.setUserRateLimitFlag(userOption, rateLimitFlagOption);

@@ -28,4 +28,8 @@ const userOptions = {
 
 const userOperations = new UserOperations(userOptions);
 
-userOperations.setUserRateLimitFlag(userOption, rateLimitFlagOption, process.exit);
+userOperations.setUserRateLimitFlag(
+	userOption, 
+	rateLimitFlagOption, 
+	process.exit
+);

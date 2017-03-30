@@ -13,16 +13,6 @@ add_credit
   .option('-a, --amount <amount>', 'Amount of credit in cents')
   .parse(process.argv);
 
-if (!add_credit.user) {
-  console.error('\n  missing user, try --help');
-  process.exit(1);
-}
-
-if (!add_credit.amount) {
-  console.error('\n  missing amount, try --help');
-  process.exit(1);
-}
-
 const userOption = add_credit.user;
 const amountOption = parseInt(add_credit.amount);
 

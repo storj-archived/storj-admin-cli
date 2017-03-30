@@ -1,19 +1,13 @@
 'use strict';
 
-const credits = require('../lib/utils');
+const credits = require('../lib/credits');
 const {expect} = require('chai');
+const sinon = require('sinon');
 
 describe('Credit functions', function() {
-
+  const sandbox = sinon.sandbox.create();
+  afterEach(() => sandbox.restore());
   describe('#addManualCredit', function() {
-    it('should log error with no user argument', function() {
-   
-    });
-
-    it('should log error with no amount argument', function() {
-
-    });
-
     it('should log error if user does not exist', function() {
 
     });

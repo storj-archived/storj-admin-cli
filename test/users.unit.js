@@ -1,6 +1,6 @@
 'use strict';
 
-const users = require('../lib/credits');
+const users = require('../lib/users');
 const {expect} = require('chai');
 
 describe('User functions', function() {
